@@ -1,6 +1,10 @@
 module com.keremyurekli.minecraftservergui {
     requires javafx.controls;
     requires javafx.fxml;
+    requires java.management;
+    requires com.google.gson;
+    requires java.ngrok;
+    requires java.desktop;
 
 
     opens com.keremyurekli.minecraftservergui to javafx.fxml;

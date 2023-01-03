@@ -1,14 +1,16 @@
 package com.keremyurekli.minecraftservergui;
 
-import com.github.alexdlaird.ngrok.NgrokClient;
-import com.github.alexdlaird.ngrok.installer.NgrokV2CDNUrl;
-import com.github.alexdlaird.ngrok.installer.NgrokVersion;
 import javafx.application.Application;
-import javafx.scene.control.*;
+import javafx.application.Platform;
+import javafx.scene.control.TextArea;
 import javafx.stage.Stage;
 
-import java.io.*;
+import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.util.Locale;
+import java.util.concurrent.Executors;
 
 
 public class Main extends Application {
@@ -28,59 +30,97 @@ public class Main extends Application {
     public static String SERVER_PARENT_PATH;
 
 
-
     public static Process PROCESS = null;
-
 
 
     public static int MC_ONLINE_PLAYERS;
     public static int MC_PLAYERS_MAX;
-    public static String MC_SOFTWARE;
     public static String MC_VERSION;
 
-
-
-
-
+    public static String MC_MOTD;
 
 
     public static String NGROK_IP;
     public static String PORT;
     public static boolean NGROK_IS_RUNNING = false;
 
-    public static File NGROK_FILE = new File("NgrokAuthToken.txt");
 
 
 
-
-    @Override
-    public void start(Stage stage) throws IOException, InterruptedException {
-        Locale.setDefault(new Locale("en", "TR"));
-
-        stage.setResizable(false);
-        stage.setTitle("ServerGUI v1.0");
-        stage.setScene(GUI.createStartupScene(stage));
-        stage.show();
-
-        PositionableList ps = new PositionableList();
-
-    }
-
-
-    @Override
-    public void stop(){
-        System.out.println("exit.event");
-        if(PROCESS != null && PROCESS.isAlive()){
+    public static void manualStop() throws IOException {
+        if (PROCESS != null && PROCESS.isAlive()) {
             PROCESS.destroy();
-        }
-        if(NGROK_IS_RUNNING){
-            Util.ngrokSwitch(null,null);
-        }
+            PROCESS = null;
+            outputStream.close();
+            inputStream.close();
+            outputStream = null;
+            inputStream = null;
+            GUI.wonder.stop();
+            Platform.runLater(() -> {
+                Main.logger.appendText("[STOPPING THE SERVER]");
+            });
 
+        }
+        if (PROCESS == null) {
+            GUI.buttonUpdate();
+        }
+        if (NGROK_IS_RUNNING) {
+            Util.ngrokSwitch(null, null);
+            NGROK_IS_RUNNING = false;
+        }
     }
 
     public static void main(String[] args) {
         launch();
+    }
+
+    @Override
+    public void start(Stage stage) throws IOException, InterruptedException {
+        Locale.setDefault(new Locale("en", Locale.getDefault().getCountry()));
+
+
+        GUI.stage = stage;
+
+        stage.setResizable(false);
+        stage.setTitle("ServerGUI");
+        stage.setScene(GUI.createStartupScene());
+        stage.show();
+
+
+    }
+
+    @Override
+    public void stop() throws IOException, InterruptedException {
+
+
+        if (PROCESS != null && PROCESS.isAlive()) {
+            PROCESS.destroy();
+            PROCESS = null;
+            outputStream.close();
+            inputStream.close();
+            outputStream = null;
+            inputStream = null;
+            GUI.wonder.stop();
+            Platform.runLater(() -> {
+                Main.logger.appendText("[STOPPING THE SERVER]");
+            });
+
+        }
+        if (PROCESS == null) {
+            GUI.buttonUpdate();
+        }
+        if (NGROK_IS_RUNNING) {
+            Util.ngrokSwitch(null, null);
+            NGROK_IS_RUNNING = false;
+        }
+
+
+        if (PROCESS != null && PROCESS.isAlive()) {
+            PROCESS.waitFor();
+        }
+        Platform.exit();
+        System.exit(0);
+
     }
 }
 

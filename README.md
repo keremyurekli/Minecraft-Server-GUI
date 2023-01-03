@@ -5,7 +5,7 @@ Do you want to manage your minecraft server easily? You are in the right place, 
 ## **Features:**                
   >Customizable ram amount, port, javapath and more                 
   >Portforwarding option (via [ngrok](https://ngrok.com/), [java-ngrok](https://github.com/alexdlaird/java-ngrok))                   
-  >Server information (only works while portforwarding is enabled)
+  >View server information (only works while portforwarding is enabled)
   
 ## **Usage:**
 When you start the application you will see a file chooser. Locate and choose jar file of your server.

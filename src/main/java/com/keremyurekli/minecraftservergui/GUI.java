@@ -29,6 +29,7 @@ import java.io.IOException;
 import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.Collections;
+import java.util.Objects;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.function.UnaryOperator;
 
@@ -68,7 +69,7 @@ public class GUI {
                         lbl.setText("MOTD: " + MC_MOTD + "\nOnline Players: " + MC_ONLINE_PLAYERS + " / " + MC_PLAYERS_MAX + "\n" + "Server Version: " + MC_VERSION);
 
                     } else {
-//                    lbl.setText("You must enable portforwarding to view server information!");
+                    lbl.setText("You must enable portforwarding to view server information!");
                     }
 
                 }
@@ -162,7 +163,7 @@ public class GUI {
 
         Label lbl5 = new Label("Portforwarding Service:");
 
-        ComboBox cmb1 = new ComboBox();
+        ComboBox<String> cmb1 = new ComboBox<>();
         cmb1.setDisable(true);
         cmb1.getItems().addAll("ngrok (default)");
         cmb1.setValue("ngrok (default)");
@@ -213,11 +214,7 @@ public class GUI {
 
                         }
                         String str = Util.ngrokSwitch(PORT, tf4.getText());
-                        if (str == null) {
-                            tf5.setText("PORTFORWARDING IS NOT ENABLED");
-                        } else {
-                            tf5.setText(str);
-                        }
+                        tf5.setText(Objects.requireNonNullElse(str, "PORTFORWARDING IS NOT ENABLED"));
                     } else {
                         b1.requestFocus();
                     }
@@ -243,9 +240,7 @@ public class GUI {
             if(Desktop.isDesktopSupported()){
                 try {
                     Desktop.getDesktop().browse(new URL("https://github.com/keremyurekli").toURI());
-                } catch (IOException ex) {
-                    throw new RuntimeException(ex);
-                } catch (URISyntaxException ex) {
+                } catch (IOException | URISyntaxException ex) {
                     throw new RuntimeException(ex);
                 }
             }
@@ -276,17 +271,17 @@ public class GUI {
 
 
 
-        p2.setAlignment(lbl9,Pos.TOP_CENTER);
-        p2.setAlignment(lbl8,Pos.TOP_CENTER);
-        p2.setAlignment(b5,Pos.TOP_LEFT);
+        StackPane.setAlignment(lbl9,Pos.TOP_CENTER);
+        StackPane.setAlignment(lbl8,Pos.TOP_CENTER);
+        StackPane.setAlignment(b5,Pos.TOP_LEFT);
         p2.getChildren().addAll(b5,lbl8,lbl9);
 
         PositionableList positionableList = new PositionableList();
         p1.getChildren().addAll(lbl1, b1, lbl2, tf1, lbl4, tf3, lbl3, tf2, b2, b3, lbl5, cmb1, b4, lbl6, tf4, lbl7, tf5,p2);
         for (Node n : p1.getChildren()) {
-            p1.setAlignment(n, Pos.TOP_CENTER);
+            StackPane.setAlignment(n, Pos.TOP_CENTER);
         }
-        p1.setAlignment(p2,Pos.BOTTOM_CENTER);
+        StackPane.setAlignment(p2,Pos.BOTTOM_CENTER);
 
 
 
@@ -398,7 +393,7 @@ public class GUI {
 
         TextArea ta = new TextArea();
         ta.setWrapText(true);
-        p1.setAlignment(ta, Pos.TOP_CENTER);
+        StackPane.setAlignment(ta, Pos.TOP_CENTER);
         ta.setFont(new Font("Consolas", 12));
         ta.setEditable(false);
         Main.logger = ta;
@@ -427,9 +422,7 @@ public class GUI {
                 stage.setTitle("MinecraftServerGUI v1.0 opened with debug mode");
                 try {
                     stage.setScene(createMainScene());
-                } catch (InterruptedException e) {
-                    throw new RuntimeException(e);
-                } catch (IOException e) {
+                } catch (InterruptedException | IOException e) {
                     throw new RuntimeException(e);
                 }
                 stage.show();

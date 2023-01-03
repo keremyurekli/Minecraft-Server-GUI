@@ -14,6 +14,7 @@ import javafx.application.Platform;
 import java.io.*;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.Objects;
 import java.util.Scanner;
 import java.util.concurrent.Executors;
 
@@ -96,10 +97,13 @@ public class Util {
         if (JsonParser.parseString(String.valueOf(j1.get("motd"))) != JsonNull.INSTANCE) {
             j4 = (JsonObject) JsonParser.parseString(String.valueOf(j1.get("motd")));
         }
+        assert j2 != null;
         Main.MC_ONLINE_PLAYERS = j2.asMap().get("online").getAsInt();
         Main.MC_PLAYERS_MAX = j2.asMap().get("max").getAsInt();
 
+        assert j4 != null;
         Main.MC_MOTD = j4.asMap().get("clean").getAsString().replace("\n", "");
+        assert j3 != null;
         Main.MC_VERSION = j3.asMap().get("name_clean").getAsString();
 
     }
@@ -110,7 +114,7 @@ public class Util {
             Main.NGROK_IS_RUNNING = true;
             if (ngrokClient == null) {
                 ngrokClient = new NgrokClient.Builder().withJavaNgrokConfig(javaNgrokConfig).build();
-                if (readNgrok() != authtoken) {
+                if (!Objects.equals(readNgrok(), authtoken)) {
                     ngrokClient.setAuthToken(authtoken);
                 }
             }
@@ -124,7 +128,6 @@ public class Util {
             if (ngrokClient != null) {
                 Main.NGROK_IS_RUNNING = false;
                 ngrokClient.kill();
-                rtrn = null;
             }
 
 

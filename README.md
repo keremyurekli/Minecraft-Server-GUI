@@ -49,7 +49,7 @@ If you want to use portforwarding for the first time, follow these steps
   
   > Support for more portforwarding services
   
- ## **Thanks to **                  
+ ## Thanks to:                  
  >[alexdlaird](https://github.com/alexdlaird) for [java-ngrok](https://github.com/alexdlaird/java-ngrok)  
  
  >[ngrok](https://ngrok.com/)

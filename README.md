@@ -38,7 +38,9 @@ If you want to use portforwarding for the first time, follow these steps
 
 4) Go back to the app and paste it to the "Ngrok Auth Token" part in the gui
 
-5) Done, Portforwarding is ready!
+5) When you start portforwarding, it will give you public ip address to join the server
+
+6) Done, Portforwarding is ready!
 
 > **WARNING**: You need to start the server to use portforwarding!
                       

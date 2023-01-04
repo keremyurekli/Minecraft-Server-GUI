@@ -4,6 +4,7 @@ module com.keremyurekli.minecraftservergui {
     requires com.google.gson;
     requires java.ngrok;
     requires java.desktop;
+    requires commons.io;
 
 
     opens com.keremyurekli.minecraftservergui to javafx.fxml;

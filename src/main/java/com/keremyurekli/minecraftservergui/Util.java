@@ -144,8 +144,12 @@ public class Util {
             while (myReader.hasNextLine()) {
                 String data = myReader.nextLine();
                 JsonObject j1 = (JsonObject) JsonParser.parseString(data);
-                end = j1.asMap().get("authtoken").toString();
-                end = end.substring(1, end.length() - 1);
+                if(j1.asMap().get("authtoken") != null) {
+                    end = j1.asMap().get("authtoken").toString();
+                    end = end.substring(1, end.length() - 1);
+                }else{
+                    end = "";
+                }
             }
             myReader.close();
         } catch (FileNotFoundException e) {

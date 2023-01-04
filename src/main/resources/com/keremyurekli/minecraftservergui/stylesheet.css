@@ -1,6 +1,6 @@
 
 .button {
-   -fx-background-image: url("file:src/main/resources/com/keremyurekli/minecraftservergui/images/oak_planks.png");
+   -fx-background-image: url("images/oak_planks.png");
    -fx-text-fill: white;
    -fx-background-size: 24 25;
    -fx-background-repeat: round;
@@ -17,30 +17,30 @@
 
 }
 .split-pane:horizontal > .split-pane-divider {
-   -fx-background-image: url("file:src/main/resources/com/keremyurekli/minecraftservergui/images/oak_log.png");
+   -fx-background-image: url("images/oak_log.png");
    -fx-background-insets: 1;
 }
 .split-pane:vertical > .split-pane-divider {
-   -fx-background-image: url("file:src/main/resources/com/keremyurekli/minecraftservergui/images/oak_log.png");
+   -fx-background-image: url("images/oak_log.png");
    -fx-background-insets: 1;
 
 }
 .static-split .split-pane *.horizontal-grabber { -fx-background-color: transparent; }
 .static-split .split-pane *.vertical-grabber   { -fx-background-color: transparent; }
 .separator{
--fx-background-image: url("file:src/main/resources/com/keremyurekli/minecraftservergui/images/oak_log.png");
+-fx-background-image: url("images/oak_log.png");
 -fx-background-insets: 1;
 
 }
 #leftmenu {
-   -fx-background-image: url("file:src/main/resources/com/keremyurekli/minecraftservergui/images/stone.png");
+   -fx-background-image: url("images/stone.png");
    -fx-background-size: 32 32;
       -fx-font-weight: bold;
 }
 
 #topmenu{
 
-   -fx-background-image: url("file:src/main/resources/com/keremyurekli/minecraftservergui/images/white_wool.png");
+   -fx-background-image: url("images/white_wool.png");
    -fx-background-size: 32 32;
       -fx-font-weight: bold;
 
@@ -48,7 +48,7 @@
 }
 
 .combo-box{
-   -fx-background-image: url("file:src/main/resources/com/keremyurekli/minecraftservergui/images/smooth_stone.png");
+   -fx-background-image: url("images/smooth_stone.png");
       -fx-text-fill: white;
       -fx-background-size: 24 25;
       -fx-background-repeat: round;
@@ -70,7 +70,7 @@
 
 .text-field {
 
-        -fx-background-image: url("file:src/main/resources/com/keremyurekli/minecraftservergui/images/deepslate_tiles.png");
+        -fx-background-image: url("images/deepslate_tiles.png");
       -fx-text-fill: white;
       -fx-background-size: 24 25;
       -fx-background-repeat: round;
@@ -89,24 +89,19 @@
 
 #startupscene{
 
-        -fx-background-image: url("file:src/main/resources/com/keremyurekli/minecraftservergui/images/stone.png");
+        -fx-background-image: url("images/stone.png");
       -fx-text-fill: white;
       -fx-font-weight: bold;
       -fx-background-size: 24 25;
       -fx-background-repeat: round;
       -fx-background-color: -fx-shadow-highlight-color, -fx-outer-border, -fx-inner-border, -fx-body-color;
       -fx-background-insets: 1;
-
-      -fx-border-color: black ;
-      -fx-border-width: 1 ;
-      -fx-border-radius: 5 ;
-      -fx-border-insets: -1;
 }
 
 #input{
 
 
-      -fx-background-image: url("file:src/main/resources/com/keremyurekli/minecraftservergui/images/obsidian.png");
+      -fx-background-image: url("images/obsidian.png");
       -fx-text-fill: white;
       -fx-background-size: 24 24;
       -fx-background-repeat: repeat;
@@ -126,7 +121,7 @@
 
 
 .text-area .content {
-    -fx-background-image: url("file:src/main/resources/com/keremyurekli/minecraftservergui/images/gray_concrete.png");
+    -fx-background-image: url("images/gray_concrete.png");
     -fx-background-size: 32 32;
                        -fx-border-color: black;
                        -fx-border-width:2;
@@ -140,7 +135,7 @@
 
 
 #littlemenu{
--fx-background-image: url("file:src/main/resources/com/keremyurekli/minecraftservergui/images/smallmenubg.png");
+-fx-background-image: url("images/smallmenubg.png");
       -fx-background-size: 75%;
          -fx-font-weight: bold;
          -fx-background-repeat: repeat-x;

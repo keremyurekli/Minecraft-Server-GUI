@@ -5,10 +5,7 @@ import javafx.application.Platform;
 import javafx.scene.control.TextArea;
 import javafx.stage.Stage;
 
-import java.io.File;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
+import java.io.*;
 import java.util.Locale;
 
 
@@ -76,7 +73,6 @@ public class Main extends Application {
     @Override
     public void start(Stage stage) throws IOException, InterruptedException {
         Locale.setDefault(new Locale("en", Locale.getDefault().getCountry()));
-
 
         GUI.stage = stage;
 

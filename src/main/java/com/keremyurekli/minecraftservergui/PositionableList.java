@@ -13,7 +13,6 @@ public class PositionableList extends ArrayList<Node> {
 
         for (int i = 0; i < this.size(); i++) {
             Node n = this.get(i);
-            System.out.println(n.getTypeSelector());
             if (i == 0) {
                 n.setTranslateY(startheight);
             } else {

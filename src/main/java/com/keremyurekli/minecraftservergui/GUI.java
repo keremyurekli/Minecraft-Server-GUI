@@ -1,5 +1,8 @@
 package com.keremyurekli.minecraftservergui;
 
+import com.github.alexdlaird.ngrok.NgrokClient;
+import com.github.alexdlaird.ngrok.conf.JavaNgrokConfig;
+import com.github.alexdlaird.ngrok.installer.NgrokVersion;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.application.Platform;
@@ -45,18 +48,17 @@ public class GUI {
     public static Stage stage = null;
 
     public static StackPane createTopMenu() throws IOException {
-        Font.loadFont("file:src/main/resources/com/keremyurekli/minecraftservergui/Minecraft.ttf", 12);
+        Font.loadFont("com/keremyurekli/minecraftservergui/Minecraft.ttf", 12);
 
 
         StackPane p1 = new StackPane();
-        p1.setStyle("-fx-background-color: red;");
         p1.setId("topmenu");
         Label lbl = new Label();
         p1.getChildren().addAll(lbl);
         lbl.setText("Can't get information from server!");
 
         if(wonder == null){
-            wonder = new Timeline(new KeyFrame(Duration.seconds(1), new EventHandler<ActionEvent>() {
+            wonder = new Timeline(new KeyFrame(Duration.seconds(16), new EventHandler<ActionEvent>() {
 
                 @Override
                 public void handle(ActionEvent event) {
@@ -81,6 +83,13 @@ public class GUI {
         return p1;
     }
 
+    private static void labelFix(){
+        Platform.runLater(()->{
+            lbl1.setText("DEBUG MODE");
+        });
+    }
+
+    private static Label lbl1;
     public static StackPane createLeftMenu() {
 
         StackPane p1 = new StackPane();
@@ -92,6 +101,7 @@ public class GUI {
         } else {
             lbl1.setText("DEBUG MODE");
         }
+        GUI.lbl1 = lbl1;
 
 
         Button b1 = new Button("START SERVER");
@@ -174,8 +184,10 @@ public class GUI {
         tf4.setAlignment(Pos.CENTER);
         tf4.setPromptText("ENTER YOUR NGROK AUTH TOKEN");
         tf4.setMaxWidth(240);
-        if (!Util.readNgrok().isEmpty() || !Util.readNgrok().isBlank()) {
-            tf4.setText(Util.readNgrok());
+        if (Util.readNgrok() != null) {
+            if(!Util.readNgrok().isEmpty() || !Util.readNgrok().isBlank()){
+                tf4.setText(Util.readNgrok());
+            }
         }
 
         Button b4 = new Button("START PORTFORWARDING");
@@ -233,13 +245,13 @@ public class GUI {
         Label lbl8 = new Label("This app made by keremyurekli in 2022");
         lbl8.setTranslateY(50);
 
-        Hyperlink lbl9 = new Hyperlink("My github page");
+        Hyperlink lbl9 = new Hyperlink("Github page of project");
         lbl9.setTranslateY(80);
 
         lbl9.setOnAction(e -> {
             if(Desktop.isDesktopSupported()){
                 try {
-                    Desktop.getDesktop().browse(new URL("https://github.com/keremyurekli").toURI());
+                    Desktop.getDesktop().browse(new URL("https://github.com/keremyurekli/MinecraftServerGui").toURI());
                 } catch (IOException | URISyntaxException ex) {
                     throw new RuntimeException(ex);
                 }
@@ -415,6 +427,7 @@ public class GUI {
     public static Scene createStartupScene() {
         StackPane p1 = new StackPane();
         p1.setId("startupscene");
+        stage.setTitle("ServerGUI");
         Label lb = new Label("You must choose the JAR file of your server");
         p1.setOnKeyPressed(event -> {
             if (event.getCode() == KeyCode.F12) {
@@ -422,6 +435,7 @@ public class GUI {
                 stage.setTitle("MinecraftServerGUI v1.0 opened with debug mode");
                 try {
                     stage.setScene(createMainScene());
+                    labelFix();
                 } catch (InterruptedException | IOException e) {
                     throw new RuntimeException(e);
                 }
@@ -461,16 +475,27 @@ public class GUI {
             }
         });
 
+        Button b2 = new Button("NGROK SETUP");
+        b2.setOnAction(event -> {
+            JavaNgrokConfig javaNgrokConfig = new JavaNgrokConfig.Builder().withNgrokVersion(NgrokVersion.V3).build();
+            NgrokClient ngrk= new NgrokClient.Builder()
+                    .withJavaNgrokConfig(javaNgrokConfig)
+                    .build();
+        });
+        b2.setTranslateX(5);
+        b2.setTranslateY(-5);
+
+        StackPane.setAlignment(b2, Pos.BOTTOM_LEFT);
         StackPane.setAlignment(lb, Pos.CENTER);
         StackPane.setAlignment(b1, Pos.CENTER);
         lb.setTranslateY(-34);
 
 
 
-        p1.getChildren().addAll(lb, b1);
+        p1.getChildren().addAll(lb, b1,b2);
 
         Scene scene = new Scene(p1, Main.SCREEN_WIDTH / 5, Main.SCREEN_HEIGHT / 3);
-        scene.getStylesheets().add("file:src/main/resources/com/keremyurekli/minecraftservergui/stylesheet.css");
+        scene.getStylesheets().add("com/keremyurekli/minecraftservergui/stylesheet.css");
         return scene;
     }
 
@@ -489,7 +514,7 @@ public class GUI {
 
 
         Scene scene = new Scene(splt1, SCREEN_WIDTH, SCREEN_HEIGHT);
-        scene.getStylesheets().add("file:src/main/resources/com/keremyurekli/minecraftservergui/stylesheet.css");
+        scene.getStylesheets().add("com/keremyurekli/minecraftservergui/stylesheet.css");
         return scene;
     }
 }

@@ -1,11 +1,13 @@
 # Minecraft Server Gui
 
+> **WARNING**: Requires java 17 or higher!
+
 Do you want to manage your minecraft server easily? You are in the right place, Minecraft Server Gui allows you to do this.
 
 ## **Features:**                
   >Customizable ram amount, port, javapath and more                 
   >Portforwarding option (via [ngrok](https://ngrok.com/), [java-ngrok](https://github.com/alexdlaird/java-ngrok))                   
-  >View server information (only works while portforwarding is enabled)
+  >View server information
   
 ## **Usage:**
 When you start the application you will see a file chooser. Locate and choose jar file of your server.

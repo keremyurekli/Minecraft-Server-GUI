@@ -16,13 +16,18 @@ When you start the application you will see a file chooser. Locate and choose ja
 
 If you chose your jar file you will see a simple and easy-to-use gui.
 
-![image](https://user-images.githubusercontent.com/85027678/210393846-361f14b8-e8d0-49c3-9e47-9ed25a66fe42.png)
+![image](https://user-images.githubusercontent.com/85027678/218209075-d4c1dfd0-48f1-4f50-92fb-7245f1d25023.png)
 
 There are three parts in the gui: one for server options, one for command line and one for viewing server informations
 
-![Untitled-1](https://user-images.githubusercontent.com/85027678/210394831-fbf17e71-13c6-4fd6-98ca-bc34db052a25.png)
+![image](https://user-images.githubusercontent.com/85027678/218209081-9301fa0c-4c85-4f7c-94ad-1d3cf8223bf1.png)
 
-You can customize server settings from the left
+You can customize server settings from the left.
+
+And there is a simple built in text editor for server.properties file.
+
+![image](https://user-images.githubusercontent.com/85027678/218209426-0790d4df-7535-4cac-b24b-01f5ab4e19ba.png)
+
 
 ## **Portforwarding:**
 > At the moment there is only support for ngrok!

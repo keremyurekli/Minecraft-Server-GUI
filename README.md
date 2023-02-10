@@ -7,6 +7,7 @@ Do you want to manage your minecraft server easily? You are in the right place, 
   >Customizable ram amount, port, javapath and more                 
   >Portforwarding option (via [ngrok](https://ngrok.com/), [java-ngrok](https://github.com/alexdlaird/java-ngrok))                   
   >View server information
+  >Built-in text editor for server settings
   
 ## **Usage:**
 When you start the application you will see a file chooser. Locate and choose jar file of your server.
@@ -22,10 +23,6 @@ There are three parts in the gui: one for server options, one for command line a
 ![Untitled-1](https://user-images.githubusercontent.com/85027678/210394831-fbf17e71-13c6-4fd6-98ca-bc34db052a25.png)
 
 You can customize server settings from the left
-
-> **WARNING**: You can only use command line while server is open!
-
-> **WARNING**: For now you can only see server information if portforwarding enabled!
 
 ## **Portforwarding:**
 > At the moment there is only support for ngrok!
@@ -49,10 +46,14 @@ If you want to use portforwarding for the first time, follow these steps
   > ~~An option to remember servers and their settings~~
   
   > ~~View server information without portforwarding~~
+
+  > A menu to download server jars
   
   > Support for more portforwarding services
   
  ## Thanks to:                  
- >[alexdlaird](https://github.com/alexdlaird) for [java-ngrok](https://github.com/alexdlaird/java-ngrok)  
+ >[@alexdlaird](https://github.com/alexdlaird) for [java-ngrok](https://github.com/alexdlaird/java-ngrok)  
  
  >[ngrok](https://ngrok.com/)
+
+ >[@FXMisc](https://github.com/FXMisc) for [RichTextFX](https://github.com/FXMisc/RichTextFX)

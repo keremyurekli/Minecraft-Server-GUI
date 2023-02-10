@@ -1,0 +1,11 @@
+.styled-text-area {
+    -fx-font-size:14;
+    -fx-background-size: 32px 32px;
+    -fx-background-image: url("images/gray_concrete.png")
+}
+.purple {
+    -fx-fill: magenta;
+}
+.blue {
+    -fx-fill: aqua;
+}

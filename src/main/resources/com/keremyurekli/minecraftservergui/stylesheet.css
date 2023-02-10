@@ -139,7 +139,8 @@
       -fx-background-size: 75%;
          -fx-font-weight: bold;
          -fx-background-repeat: repeat-x;
-         }
+         -fx-background-position: 0px 15px;
+ }
 
 
 

@@ -5,6 +5,7 @@ module com.keremyurekli.minecraftservergui {
     requires java.ngrok;
     requires java.desktop;
     requires commons.io;
+    requires org.fxmisc.richtext;
 
 
     opens com.keremyurekli.minecraftservergui to javafx.fxml;

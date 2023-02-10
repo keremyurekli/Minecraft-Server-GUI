@@ -19,7 +19,9 @@ public class PositionableList extends ArrayList<Node> {
 
                 if (n.getTypeSelector().equals("Label")) {
                     n.setTranslateY(this.get(this.indexOf(n) - 1).getTranslateY() + gapbetween + labelgap);
-                } else{
+                } else if (n.getTypeSelector().equals("StackPane")){
+                    n.setTranslateY(this.get(this.indexOf(n) - 1).getTranslateY());
+                }else{
                     n.setTranslateY(this.get(this.indexOf(n) - 1).getTranslateY() + gapbetween);
                 }
 

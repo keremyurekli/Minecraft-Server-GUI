@@ -3,6 +3,7 @@ package com.keremyurekli.minecraftservergui;
 import com.github.alexdlaird.ngrok.NgrokClient;
 import com.github.alexdlaird.ngrok.conf.JavaNgrokConfig;
 import com.github.alexdlaird.ngrok.installer.NgrokVersion;
+import com.github.alexdlaird.ngrok.process.NgrokProcess;
 import com.github.alexdlaird.ngrok.protocol.CreateTunnel;
 import com.github.alexdlaird.ngrok.protocol.Proto;
 import com.github.alexdlaird.ngrok.protocol.Tunnel;
@@ -33,9 +34,6 @@ public class Util {
                 Platform.runLater(() -> {
                     Main.logger.appendText(str);
                 });
-                if (str.contains("[Server thread/INFO]: Stopping server") || str.contains("[Server thread/INFO]: Stopping the server")) {
-                    GUI.buttonUpdate();
-                }
             }
             line = bufferedReader.readLine();
         }
@@ -68,45 +66,46 @@ public class Util {
         return p;
     }
 
-    public static void httpHandle() throws IOException {
-        String url = "https://api.mcstatus.io/v2/status/java/" + Main.NGROK_IP;
-        URL obj = new URL(url);
-        HttpURLConnection con = (HttpURLConnection) obj.openConnection();
-        // optional default is GET
-        con.setRequestMethod("GET");
-        //add request header
-        con.setRequestProperty("User-Agent", "Mozilla/5.0");
-        BufferedReader in = new BufferedReader(new InputStreamReader(con.getInputStream()));
-        String inputLine;
-        StringBuffer response = new StringBuffer();
-        while ((inputLine = in.readLine()) != null) {
-            response.append(inputLine);
-        }
-        in.close();
-        JsonObject j1 = (JsonObject) JsonParser.parseString(response.toString());
-
-        JsonObject j2 = null;
-        JsonObject j3 = null;
-        JsonObject j4 = null;
-        if (JsonParser.parseString(String.valueOf(j1.get("players"))) != JsonNull.INSTANCE) {
-            j2 = (JsonObject) JsonParser.parseString(String.valueOf(j1.get("players")));
-        }
-        if (JsonParser.parseString(String.valueOf(j1.get("version"))) != JsonNull.INSTANCE) {
-            j3 = (JsonObject) JsonParser.parseString(String.valueOf(j1.get("version")));
-        }
-        if (JsonParser.parseString(String.valueOf(j1.get("motd"))) != JsonNull.INSTANCE) {
-            j4 = (JsonObject) JsonParser.parseString(String.valueOf(j1.get("motd")));
-        }
-        assert j2 != null;
-        Main.MC_ONLINE_PLAYERS = j2.asMap().get("online").getAsInt();
-        Main.MC_PLAYERS_MAX = j2.asMap().get("max").getAsInt();
-
-        assert j4 != null;
-        Main.MC_MOTD = j4.asMap().get("clean").getAsString().replace("\n", "");
-        assert j3 != null;
-        Main.MC_VERSION = j3.asMap().get("name_clean").getAsString();
-
-    }
+//    old method for getting server information
+//    public static void httpHandle() throws IOException {
+//        String url = "https://api.mcstatus.io/v2/status/java/" + Main.NGROK_IP;
+//        URL obj = new URL(url);
+//        HttpURLConnection con = (HttpURLConnection) obj.openConnection();
+//        // optional default is GET
+//        con.setRequestMethod("GET");
+//        //add request header
+//        con.setRequestProperty("User-Agent", "Mozilla/5.0");
+//        BufferedReader in = new BufferedReader(new InputStreamReader(con.getInputStream()));
+//        String inputLine;
+//        StringBuffer response = new StringBuffer();
+//        while ((inputLine = in.readLine()) != null) {
+//            response.append(inputLine);
+//        }
+//        in.close();
+//        JsonObject j1 = (JsonObject) JsonParser.parseString(response.toString());
+//
+//        JsonObject j2 = null;
+//        JsonObject j3 = null;
+//        JsonObject j4 = null;
+//        if (JsonParser.parseString(String.valueOf(j1.get("players"))) != JsonNull.INSTANCE) {
+//            j2 = (JsonObject) JsonParser.parseString(String.valueOf(j1.get("players")));
+//        }
+//        if (JsonParser.parseString(String.valueOf(j1.get("version"))) != JsonNull.INSTANCE) {
+//            j3 = (JsonObject) JsonParser.parseString(String.valueOf(j1.get("version")));
+//        }
+//        if (JsonParser.parseString(String.valueOf(j1.get("motd"))) != JsonNull.INSTANCE) {
+//            j4 = (JsonObject) JsonParser.parseString(String.valueOf(j1.get("motd")));
+//        }
+//        assert j2 != null;
+//        Main.MC_ONLINE_PLAYERS = j2.asMap().get("online").getAsInt();
+//        Main.MC_PLAYERS_MAX = j2.asMap().get("max").getAsInt();
+//
+//        assert j4 != null;
+//        Main.MC_MOTD = j4.asMap().get("clean").getAsString().replace("\n", "");
+//        assert j3 != null;
+//        Main.MC_VERSION = j3.asMap().get("name_clean").getAsString();
+//
+//    }
 
     public static String ngrokSwitch(String port, String authtoken) {
         String rtrn = null;
@@ -120,7 +119,6 @@ public class Util {
             }
             CreateTunnel sshCreateTunnel = new CreateTunnel.Builder().withProto(Proto.TCP).withAddr(port).build();
             Tunnel sshTunnel = ngrokClient.connect(sshCreateTunnel);
-            ngrokClient.getNgrokProcess();
             Main.NGROK_IP = sshTunnel.getPublicUrl().replace("tcp://", "");
             rtrn = Main.NGROK_IP;
 

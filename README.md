@@ -1,6 +1,5 @@
-# Minecraft Server Gui
-
 > **WARNING**: Requires java 17 or higher!
+# Minecraft Server Gui
 
 Do you want to manage your minecraft server easily? You are in the right place, Minecraft Server Gui allows you to do this.
 

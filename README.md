@@ -46,9 +46,9 @@ If you want to use portforwarding for the first time, follow these steps
 > **WARNING**: You need to start the server to use portforwarding!
                       
 ## **TODO:**                            
-  > An option to remember servers and their settings
+  > ~~An option to remember servers and their settings~~
   
-  > View server information without portforwarding
+  > ~~View server information without portforwarding~~
   
   > Support for more portforwarding services
   
